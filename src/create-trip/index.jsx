@@ -7,10 +7,22 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { toast } from 'sonner';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import { FcGoogle } from "react-icons/fc";
+import { useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
+
 
 function CreateTrip() {
     const [place, setPlace] = useState();
-
+    const [openDailog, setOpenDailog] = useState(false);
     const [formData, setFormData] = useState({});
 
     const handleInputChange = (name, value) => {
@@ -25,7 +37,22 @@ function CreateTrip() {
         console.log(formData);
     }, [formData])
 
+
+    const login = useGoogleLogin({
+        onSuccess: (codeResp) => GetUserProfile(codeResp),
+        onError: (error) => console.log(error),
+    })
+
     const OnGenerateTrip = async() => {
+
+        const user= localStorage.getItem('user');
+
+        if(!user) 
+        {
+            setOpenDailog(true);
+            return;
+        }
+
         if(formData?.days > 5 && !formData?.location || !formData?.budget || !formData?.traveler) 
         {
             toast("Por favor, complete todos los campos");
@@ -44,6 +71,21 @@ function CreateTrip() {
         const result = await chatSession.sendMessage(FINAL_PROMPT);
 
         console.log(result?.response?.text());
+    }
+
+    const GetUserProfile = (tokenInfo) => {
+        axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?acess_token=${tokenInfo?.access_token}`, 
+            {
+                headers: {
+                    Authorization: `Bearer ${tokenInfo?.access_token}`,
+                    Accept: 'application/json'
+                }
+        }).then((response) => {
+            console.log(response);
+            localStorage.setItem('user', JSON.stringify(response.data));
+            setOpenDailog(false);
+            OnGenerateTrip();
+        })
     }
 
     return (
@@ -111,10 +153,28 @@ function CreateTrip() {
             </div>
             <div className='my-10 flex justify-end'>
                 <Button size={'xl'} onClick={OnGenerateTrip}>Generar Viaje</Button>
-            </div>        
+            </div>
+            <Dialog open={openDailog}>
+                <DialogContent> 
+                    <img src='/public/logo.svg' alt='logo' />
+                    <DialogHeader>
+                        <DialogTitle className={'font-bold text-xl mt-5'}>Ingresa con Google</DialogTitle>
+                        <DialogDescription>
+                            <div>Ingresa a la App con Autenticación de Google</div>
+                            <div>
+                                <Button className={'w-full mt-5 flex gap-4 items-center'} size={'xl'}
+                                    onClick={login}
+                                >
+                                    <FcGoogle style={{width:'28px', height:'28px'}} />
+                                    Ingresar con Google
+                                </Button>
+                            </div>
+                        </DialogDescription>
+                    </DialogHeader>
+                </DialogContent>
+            </Dialog>
         </div>
 
-        
     );
 }
 
