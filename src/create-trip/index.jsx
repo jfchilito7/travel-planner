@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { SelectBudgetOptions, SelectTravelesList } from '@/constants/options';
+import { AI_PROMPT, SelectBudgetOptions, SelectTravelesList } from '@/constants/options';
+import { chatSession } from '@/service/AIModal';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -10,7 +11,7 @@ import { toast } from 'sonner';
 function CreateTrip() {
     const [place, setPlace] = useState();
 
-    const [formData, setFormData] = useState([]);
+    const [formData, setFormData] = useState({});
 
     const handleInputChange = (name, value) => {
 
@@ -24,13 +25,25 @@ function CreateTrip() {
         console.log(formData);
     }, [formData])
 
-    const OnGenerateTrip =() => {
+    const OnGenerateTrip = async() => {
         if(formData?.days > 5 && !formData?.location || !formData?.budget || !formData?.traveler) 
         {
             toast("Por favor, complete todos los campos");
             return;
         }
-        console.log(formData);
+        
+        const FINAL_PROMPT = AI_PROMPT
+        .replace('{location}',formData?.location?.label)
+        .replace('{days}',formData?.days)
+        .replace('{budget}',formData?.budget)
+        .replace('{traveler}',formData?.traveler)
+        .replace('{days}',formData?.days);
+
+        console.log(FINAL_PROMPT);
+
+        const result = await chatSession.sendMessage(FINAL_PROMPT);
+
+        console.log(result?.response?.text());
     }
 
     return (
