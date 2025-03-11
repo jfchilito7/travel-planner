@@ -5,6 +5,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import { toast } from 'sonner';
 
 function CreateTrip() {
     const [place, setPlace] = useState();
@@ -24,8 +25,9 @@ function CreateTrip() {
     }, [formData])
 
     const OnGenerateTrip =() => {
-        if(formData?.days > 5) {
-
+        if(formData?.days > 5 && !formData?.location || !formData?.budget || !formData?.traveler) 
+        {
+            toast("Por favor, complete todos los campos");
             return;
         }
         console.log(formData);
