@@ -6,7 +6,7 @@ function Header() {
         <div className='p-3 shadow-sm flex justify-between items-center px-5'>
             <img src="/public/logo.svg" alt="Logo" />
             <div>
-                <Button>Ingresar</Button>
+                <Button size={'xl'}>Ingresar</Button>
             </div>
         </div>
     )
