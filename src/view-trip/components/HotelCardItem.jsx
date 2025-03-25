@@ -14,8 +14,6 @@ function HotelCardItem({hotel}) {
                 textQuery:hotel?.hotelName
             }
             const result = await GetPlaceDetails(data).then(resp => {
-                console.log(resp.data.places[0].photos[3].name)
-    
                 const PhotoUrl = PHOTO_REF_URL.replace('{NAME}', resp.data.places[0].photos[0].name);
                 setPhotoUrl(PhotoUrl);
             })
@@ -29,7 +27,7 @@ function HotelCardItem({hotel}) {
         >
                         
             <div className='hover:scale-110 transition-all cursor-pointer'>
-                <img src={PhotoUrl} className='rounded-xl h-[240px] w-full object-cover' alt="imagen hotel"  />
+                <img src={PhotoUrl?PhotoUrl:'/public/fondo.webp'} className='rounded-xl h-[240px] w-full object-cover' alt="imagen hotel"  />
                 <div className='my-2 flex flex-col gap-4'>
                     <h2 className='font-medium'>{hotel?.hotelName}</h2>
                     <h2 className='text-xs text-gray-500'>📍 {hotel?.location}</h2>

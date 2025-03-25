@@ -18,15 +18,13 @@ function InfoSection({trip}) {
             textQuery:trip?.userSelection?.location?.label
         }
         const result = await GetPlaceDetails(data).then(resp => {
-            console.log(resp.data.places[0].photos[3].name)
-
             const PhotoUrl = PHOTO_REF_URL.replace('{NAME}', resp.data.places[0].photos[0].name);
             setPhotoUrl(PhotoUrl);
         })
     }
     return (
         <div>
-            <img src={PhotoUrl} className='h-[600px] w-full object-fill rounded-xl' />
+            <img src={PhotoUrl?PhotoUrl:'/public/fondo.webp'} className='h-[600px] w-full object-fill rounded-xl' />
 
             <div className='flex justify-between items-center'>
                 <div className='my-5 flex flex-col gap-2'>
