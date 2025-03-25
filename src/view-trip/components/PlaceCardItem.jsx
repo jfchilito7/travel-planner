@@ -8,6 +8,7 @@ function PlaceCardItem({place}) {
                 <div>
                     <h2 className='font-bold text-lg'>{place.placeName}</h2>
                     <p className='text-sm text-gray-500'>{place.details}</p>
+                    <h2 className='font-medium text-sm text-orange-600 mt-2'>🕔 {place.openingHours}</h2>
                 </div>
             </div>
         </a>
