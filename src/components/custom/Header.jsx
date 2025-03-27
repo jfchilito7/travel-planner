@@ -51,10 +51,15 @@ function Header() {
 
     return (
         <div className='p-3 shadow-sm flex justify-between items-center px-5'>
-            <img src="/public/logo.svg" alt="Logo" />
+            <a href={'/'}>
+                <img src="/public/logo.svg" alt="Logo" />
+            </a>
             <div>
                 {users?
                     <div className='flex items-center gap-3'>
+                        <a href='/create-trip'>
+                            <Button className={'rounded-full'}>+ Crear Viaje</Button>
+                        </a>
                         <a href='/my-trips'>
                             <Button className={'rounded-full'}>Mis Viajes</Button>
                         </a>

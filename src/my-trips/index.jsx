@@ -42,10 +42,16 @@ function MyTrips() {
             <h2 className='font-bold text-3xl'>Mis Viajes</h2>
 
             <div className='grid grid-cols-2 md:grid-cols-3 gap-5 mt-10'>
-                {userTrips.map((trip, index) => (
+                {userTrips?.length>0?userTrips.map((trip, index) => (
 
                     <UserTripCardItem key={index} trip={trip} />
-                ))}
+                ))
+            :[1,2,3,4,5,6].map((item, index) => (
+                <div key={index} className='h-64 w-full bg-slate-200 animate-pulse rounded-xl'>
+
+                </div>
+            ))
+            }
             </div>
         </div>
     )

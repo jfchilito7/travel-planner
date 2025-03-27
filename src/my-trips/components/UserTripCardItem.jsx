@@ -21,13 +21,15 @@ function UserTripCardItem({trip}) {
 
 
     return (
-        <div>
-            <img src={PhotoUrl?PhotoUrl:'/public/fondo.webp'} alt="imagen viaje" className='rounded-xl h-[240px] w-full object-cover'/>
-            <div>
-                <h2 className='font-bold text-lg'>{trip?.userSelection?.location?.label}</h2>
-                <h2 className='text-sm text-gray-500'>{trip?.userSelection.days} días de viaje con costo {trip?.userSelection.budget}</h2>
+        <a href={'/view-trip/'+trip?.id}>
+            <div className='hover:scale-105 transition-all'>
+                <img src={PhotoUrl?PhotoUrl:'/public/fondo.webp'} alt="imagen viaje" className='rounded-xl h-[254px] w-full object-cover'/>
+                <div>
+                    <h2 className='font-bold text-lg'>{trip?.userSelection?.location?.label}</h2>
+                    <h2 className='text-sm text-gray-500'>{trip?.userSelection.days} días de viaje con costo {trip?.userSelection.budget}</h2>
+                </div>
             </div>
-        </div>
+        </a>
     )
 }
 
