@@ -17,6 +17,8 @@ function Hero() {
                 <Link to={'/create-trip'}>
                     <Button size={'xl'}>Empezar tu busqueda.</Button>
                 </Link>
+
+                <img src="/mockup.png" alt="mockup" className='mt-10' />
             </div>
     )
 }
