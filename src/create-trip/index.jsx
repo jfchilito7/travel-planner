@@ -114,15 +114,15 @@ function CreateTrip() {
     }
 
     return (
-        <div className="sm:px-10 md:px-32 lg:px-56 xl:px-72 px-5 mt-10">   
-            <h2 className="font-bold text-3xl">Díganos sus preferencias de viaje 🏕️ 🏝️</h2>
-            <p className="mt-3 text-gray-500 text-xl">
+        <div className="px-5 sm:px-10 md:px-32 lg:px-56 xl:px-72 mt-10 max-w-screen-xl mx-auto">   
+            <h2 className="font-bold text-2xl sm:text-3xl">Díganos sus preferencias de viaje 🏕️ 🏝️</h2>
+            <p className="mt-3 text-gray-500 text-base sm:text-lg">
                 Sólo tiene que facilitarnos algunos datos básicos y nuestro planificador de viajes generará un itinerario personalizado basado en sus preferencias.
             </p>
 
-            <div className="mt-20 flex flex-col gap-10" >
+            <div className="mt-16 flex flex-col gap-10" >
                 <div>
-                <h2 className="text-xl my-3 font-medium">¿Cuál es tu destino elegido?</h2>
+                <h2 className="text-lg sm:text-xl my-3 font-medium">¿Cuál es tu destino elegido?</h2>
                 <GooglePlacesAutocomplete
                     apiKey={import.meta.env.VITE_GOOGLE_PLACE_API_KEY}
                     selectProps={{
@@ -134,44 +134,42 @@ function CreateTrip() {
                 </div>
 
                 <div className='mb-10'>
-                    <h2 className="text-xl my-3 font-medium">¿Cuántos días planeas viajar?</h2>
+                    <h2 className="text-lg sm:text-xl my-3 font-medium">¿Cuántos días planeas viajar?</h2>
                     <Input placeholder="Ejem. 3" type='number' 
                         onChange={(e) => handleInputChange('days', e.target.value)}
                     />
                 </div>
             </div>
 
-            <div className='mb-10'>
-                <h2 className="text-xl my-3 font-medium">¿Cuál es tu presupuesto?</h2>
-                <p></p>
-                <div className='grid grid-cols-3 gap-5 mt-5'>
+            <div className='mb-10 mt-10'>
+                <h2 className="text-lg sm:text-xl my-3 font-medium">¿Cuál es tu presupuesto?</h2>
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-5'>
                     {SelectBudgetOptions.map((item, index) => (
                         <div key={index} 
                             onClick={() =>handleInputChange('budget', item.title)}
                         className={`p-4 border rounded-lg cursor-pointer hover:shadow-lg
                             ${formData?.budget==item.title && 'shadow-lg border-black'}    
                         `}>
-                            <h2 className='text-4xl'>{item.icon}</h2>
-                            <h2 className='font-bold text-lg'>{item.title}</h2>
-                            <p className='text-2sm text-gray-500'>{item.description}</p>
+                            <h2 className='text-3xl'>{item.icon}</h2>
+                            <h2 className='font-bold text-base sm:text-lg'>{item.title}</h2>
+                            <p className='text-sm text-gray-500'>{item.description}</p>
                         </div>  
                     ))}
                 </div>
             </div>
 
-            <div>
-                <h2 className="text-xl my-3 font-medium">¿Con quién planeas viajar en tu próxima aventura?</h2>
-                <p></p>
-                <div className='grid grid-cols-3 gap-5 mt-5'>
+            <div className='mt-10'>
+                <h2 className="text-lg sm:text-xl my-3 font-medium">¿Con quién planeas viajar en tu próxima aventura?</h2>
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-5'>
                     {SelectTravelesList.map((item, index) => (
                         <div key={index}
                             onClick={() => handleInputChange('traveler', item.people)}
                         className={`p-4 border rounded-lg cursor-pointer hover:shadow-lg
                             ${formData?.traveler == item.people && 'shadow-lg border-black'}
                         `}>
-                            <h2 className='text-4xl'>{item.icon}</h2>
-                            <h2 className='font-bold text-lg'>{item.title}</h2>
-                            <p className='text-2sm text-gray-500'>{item.description}</p>
+                            <h2 className='text-3xl'>{item.icon}</h2>
+                            <h2 className='font-bold text-base sm:text-lg'>{item.title}</h2>
+                            <p className='text-sm text-gray-500'>{item.description}</p>
                         </div>  
                     ))}
                 </div>  
@@ -187,12 +185,12 @@ function CreateTrip() {
                 <DialogContent> 
                     <img src='/public/logo.svg' alt='logo' />
                     <DialogHeader>
-                        <DialogTitle className={'font-bold text-xl mt-5'}>Ingresa con Google</DialogTitle>
-                        <DialogDescription>
+                        <DialogTitle className={'font-bold text-xl mt-5 text-center'}>Ingresa con Google</DialogTitle>
+                        <DialogDescription className={'text-center'}>
                             <div>Ingresa a la App con Autenticación de Google</div>
-                            <div>
+                            <div className={'mt-5'}>
                                 <Button
-                                    className={'w-full mt-5 flex gap-4 items-center'} size={'xl'}
+                                    className={'w-full flex gap-4 items-center justify-center'} size={'xl'}
                                     onClick={login}
                                 >
                                     <FcGoogle style={{width:'28px', height:'28px'}} />

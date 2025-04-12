@@ -26,11 +26,11 @@ function HotelCardItem({hotel}) {
             rel='noopener noreferrer'
         >
                         
-            <div className='hover:scale-110 transition-all cursor-pointer'>
-                <img src={PhotoUrl?PhotoUrl:'/public/fondo.webp'} className='rounded-xl h-[240px] w-full object-cover' alt="imagen hotel"  />
-                <div className='my-2 flex flex-col gap-4'>
-                    <h2 className='font-medium'>{hotel?.hotelName}</h2>
-                    <h2 className='text-xs text-gray-500'>📍 {hotel?.location}</h2>
+            <div className='hover:scale-[1.03] transition-transform duration-300 cursor-pointer shadow-md rounded-xl overflow-hidden'>
+                <img src={PhotoUrl?PhotoUrl:'/public/fondo.webp'} className='w-full h-[200px] sm:h-[240px] object-cover' alt="imagen hotel"  />
+                <div className='p-4 flex flex-col gap-1 sm:gap-2'>
+                    <h2 className='font-semibold text-base sm:text-lg line-clamp-1'>{hotel?.hotelName}</h2>
+                    <h2 className='text-sm text-gray-500 line-clamp-1'>📍 {hotel?.location}</h2>
                     <h2 className='text-sm'>💰 {hotel?.price}</h2>
                     <h2 className='text-sm'>⭐️ {hotel?.rating}</h2>
                 </div>
