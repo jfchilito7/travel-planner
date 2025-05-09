@@ -14,17 +14,19 @@ Aplicación web para planear viajes personalizados con ayuda de inteligencia art
 
 ## 🖼️ Capturas
 
+![mockup](/public/MOCKUP2.jpeg)
+
 ### 🔐 Inicio de sesión con Google
 
-![Login](https://github.com/jfchilito7/travel-planner/assets/your-user-id/login.png)
+![Login](/public/iniciosesion.png)
 
 ### 📋 Crear viaje con IA
 
-![Crear Viaje](https://github.com/jfchilito7/travel-planner/assets/your-user-id/create-trip.png)
+![Crear Viaje](/public/crearviaje.png)
 
 ### 📂 Lista de viajes creados
 
-![Mis viajes](https://github.com/jfchilito7/travel-planner/assets/your-user-id/my-trips.png)
+![Mis viajes](/public/misviajes.png)
 
 ---
 
